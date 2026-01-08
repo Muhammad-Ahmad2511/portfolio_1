@@ -324,7 +324,7 @@ CERTIFICATIONS
                 Aspiring Data Scientist
               </p>
               <p className={`text-base text-slate-300 max-w-2xl mb-6 transition-all duration-1000 ${isTypingComplete ? 'opacity-100' : 'opacity-0'}`}>
-                AI Engineer with a Data Science background specializing in <span className="text-blue-400 font-semibold">Generative AI</span>, <span className="text-cyan-400 font-semibold">Deep Learning</span>, <span className="text-purple-400 font-semibold">Computer Vision</span>, and <span className="text-green-400 font-semibold">Machine Learning</span>.
+                <span className="text-blue-400 font-semibold">Data Scientist</span> specializing in <span className="text-cyan-400 font-semibold">data analysis</span> and <span className="text-purple-400 font-semibold">machine learning</span>, converting raw data into actionable insights with <span className="text-green-400 font-semibold">Python</span> and <span className="text-yellow-400 font-semibold">SQL</span>.
               </p>
               
               <div className={`flex flex-wrap justify-center md:justify-start gap-6 mb-6 transition-all duration-1000 ${isTypingComplete ? 'opacity-100' : 'opacity-0'}`}>
