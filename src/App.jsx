@@ -63,15 +63,25 @@ export default function Portfolio() {
   };
 
   const handleDownloadCV = () => {
-    if (cvFile) {
-      const link = document.createElement('a');
-      link.href = cvFile;
-      link.download = 'Muhammad_Ahmad_CV.pdf';
-      document.body.appendChild(link);
-      link.click();
-      document.body.removeChild(link);
-    } else {
-      const cvContent = `MUHAMMAD AHMAD
+    // Prefer a permanent /cv.pdf in the public folder if present
+    const publicCvUrl = '/cv.pdf';
+    fetch(publicCvUrl, { method: 'HEAD' }).then(res => {
+      if (res.ok) {
+        const link = document.createElement('a');
+        link.href = publicCvUrl;
+        link.download = 'Muhammad_Ahmad_CV.pdf';
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+      } else if (cvFile) {
+        const link = document.createElement('a');
+        link.href = cvFile;
+        link.download = 'Muhammad_Ahmad_CV.pdf';
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+      } else {
+        const cvContent = `MUHAMMAD AHMAD
 Lahore, Pakistan | +92 3264498774 | mahmadimran383@gmail.com
 
 OBJECTIVE
@@ -95,16 +105,61 @@ CERTIFICATIONS
 • Deep Learning with PyTorch - DataCamp
 • IBM Machine Learning - Coursera`;
 
-      const blob = new Blob([cvContent], { type: 'text/plain' });
-      const url = window.URL.createObjectURL(blob);
-      const link = document.createElement('a');
-      link.href = url;
-      link.download = 'Muhammad_Ahmad_CV.pdf';
-      document.body.appendChild(link);
-      link.click();
-      document.body.removeChild(link);
-      window.URL.revokeObjectURL(url);
-    }
+        const blob = new Blob([cvContent], { type: 'text/plain' });
+        const url = window.URL.createObjectURL(blob);
+        const link = document.createElement('a');
+        link.href = url;
+        link.download = 'Muhammad_Ahmad_CV.pdf';
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+        window.URL.revokeObjectURL(url);
+      }
+    }).catch(() => {
+      // network error fallback
+      if (cvFile) {
+        const link = document.createElement('a');
+        link.href = cvFile;
+        link.download = 'Muhammad_Ahmad_CV.pdf';
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+      } else {
+        const cvContent = `MUHAMMAD AHMAD
+Lahore, Pakistan | +92 3264498774 | mahmadimran383@gmail.com
+
+OBJECTIVE
+Aspiring Data Scientist with hands-on experience in machine learning, data preprocessing, and analytics.
+
+EXPERIENCE
+Technical Intern | Nepta Solutions, UK (Remote) | Jun 2025 – Aug 2025
+• Backend automation and integration tasks using C# and SAGE 50
+• RESTful API workflows and system configurations
+
+EDUCATION
+Bachelor of Science in Data Science | FAST-NUCES, Lahore | 2023 – Present
+
+SKILLS
+Programming: C, C++, Python, C#, SQL
+ML/AI: Regression, Classification, Clustering, NLP, Feature Engineering
+Tools: PyTorch, Power BI, Tableau, PostgreSQL
+
+CERTIFICATIONS
+• Feature Engineering for Machine Learning - DataCamp
+• Deep Learning with PyTorch - DataCamp
+• IBM Machine Learning - Coursera`;
+
+        const blob = new Blob([cvContent], { type: 'text/plain' });
+        const url = window.URL.createObjectURL(blob);
+        const link = document.createElement('a');
+        link.href = url;
+        link.download = 'Muhammad_Ahmad_CV.pdf';
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+        window.URL.revokeObjectURL(url);
+      }
+    });
   };
 
   const handleImageUpload = (e) => {
