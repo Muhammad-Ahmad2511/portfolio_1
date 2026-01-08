@@ -304,13 +304,8 @@ CERTIFICATIONS
           <div className="flex flex-col md:flex-row items-center gap-12 mb-8">
             <div className="relative flex-shrink-0">
               <div className="relative w-64 h-64 rounded-full overflow-hidden border-4 border-blue-400 shadow-2xl shadow-blue-500/50">
-                {imageUrl ? (
-                  <img src={imageUrl} alt="Muhammad Ahmad" className="w-full h-full object-cover" />
-                ) : (
-                  <div className="w-full h-full bg-gradient-to-br from-blue-500 to-cyan-500 flex items-center justify-center">
-                    <span className="text-6xl font-bold text-white">MA</span>
-                  </div>
-                )}
+                {/* Use uploaded image if present, otherwise use permanent /profile.jpg in public */}
+                <img src={imageUrl || '/profile.jpg'} alt="Muhammad Ahmad" className="w-full h-full object-cover" />
               </div>
               <div className="absolute -bottom-2 -right-2 bg-blue-500 text-white px-4 py-2 rounded-full text-sm font-semibold shadow-lg">
                 Data Scientist
