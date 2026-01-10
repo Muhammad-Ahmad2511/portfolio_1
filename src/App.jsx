@@ -260,7 +260,7 @@ CERTIFICATIONS
               <div className={`transition-all duration-1000 ${isTypingComplete ? 'opacity-100' : 'opacity-0'}`}>
                 <button onClick={handleDownloadCV} className="inline-flex items-center gap-2 px-8 py-3 bg-gradient-to-r from-blue-500 to-cyan-500 hover:from-blue-600 hover:to-cyan-600 rounded-full font-semibold transition-all hover:scale-105 hover:shadow-lg hover:shadow-blue-500/50">
                   <Download size={20} />
-                  Download CV
+                  Download Resume
                 </button>
               </div>
             </div>
