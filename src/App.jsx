@@ -353,18 +353,24 @@ CERTIFICATIONS
             <h3 className="text-2xl font-bold text-blue-400 mb-6">Certifications</h3>
             <div className="grid md:grid-cols-2 gap-4">
               {[
-                "Feature Engineering for Machine Learning — DataCamp",
-                "Deep Learning with PyTorch — DataCamp",
-                "IBM Machine Learning — Coursera",
-                "Prompt Engineering with the OpenAI API — DataCamp",
-                "Working with the OpenAI API — DataCamp",
-                "Deep Learning and Reinforcement Learning — DataCamp",
-                "Exploratory Data Analysis for Machine Learning — Coursera"
+                { name: "Feature Engineering for Machine Learning — DataCamp", link: "#" },
+                { name: "Deep Learning with PyTorch — DataCamp", link: "#" },
+                { name: "IBM Machine Learning — Coursera", link: "#" },
+                { name: "Prompt Engineering with the OpenAI API — DataCamp", link: "#" },
+                { name: "Working with the OpenAI API — DataCamp", link: "#" },
+                { name: "Deep Learning and Reinforcement Learning — DataCamp", link: "#" },
+                { name: "Exploratory Data Analysis for Machine Learning — Coursera", link: "#" }
               ].map((cert, index) => (
-                <div key={index} className="flex items-start gap-2">
-                  <Award size={20} className="text-cyan-400 mt-1 flex-shrink-0" />
-                  <span className="text-slate-300">{cert}</span>
-                </div>
+                <a 
+                  key={index} 
+                  href={cert.link}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-start gap-2 hover:bg-slate-700/30 p-2 rounded-lg transition-all group"
+                >
+                  <Award size={20} className="text-cyan-400 mt-1 flex-shrink-0 group-hover:scale-110 transition-transform" />
+                  <span className="text-slate-300 group-hover:text-blue-400 transition-colors">{cert.name}</span>
+                </a>
               ))}
             </div>
           </div>
