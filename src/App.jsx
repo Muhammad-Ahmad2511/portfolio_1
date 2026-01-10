@@ -233,34 +233,6 @@ CERTIFICATIONS
                 </a>
               </div>
 
-              <div className={`flex flex-wrap justify-center md:justify-start gap-4 mb-6 transition-all duration-1000 ${isTypingComplete ? 'opacity-100' : 'opacity-0'}`}>
-                <a
-                  href="https://github.com/Muhammad-Ahmad2511"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 px-6 py-3 bg-slate-800 hover:bg-slate-700 rounded-lg font-semibold transition-all hover:scale-105"
-                >
-                  <Github size={20} />
-                  GitHub
-                </a>
-                <a
-                  href="https://www.linkedin.com/in/hafiz-muhammad-ahmad-b76304273/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 px-6 py-3 bg-blue-600 hover:bg-blue-700 rounded-lg font-semibold transition-all hover:scale-105"
-                >
-                  <Linkedin size={20} />
-                  LinkedIn
-                </a>
-                <a
-                  href="mailto:mahmadimran383@gmail.com"
-                  className="inline-flex items-center gap-2 px-6 py-3 bg-slate-700 hover:bg-slate-600 rounded-lg font-semibold transition-all hover:scale-105"
-                >
-                  <Mail size={20} />
-                  Email
-                </a>
-              </div>
-
               <div className={`transition-all duration-1000 ${isTypingComplete ? 'opacity-100' : 'opacity-0'}`}>
                 <button onClick={handleDownloadCV} className="inline-flex items-center gap-2 px-8 py-3 bg-gradient-to-r from-blue-500 to-cyan-500 hover:from-blue-600 hover:to-cyan-600 rounded-full font-semibold transition-all hover:scale-105 hover:shadow-lg hover:shadow-blue-500/50">
                   <Download size={20} />
@@ -409,6 +381,37 @@ CERTIFICATIONS
           <p className="text-xl text-slate-300 mb-8">
             I'm always open to discussing new opportunities and interesting projects.
           </p>
+          
+          {/* Social Links */}
+          <div className="flex flex-wrap justify-center gap-4 mb-8">
+            <a
+              href="https://github.com/Muhammad-Ahmad2511"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 px-6 py-3 bg-slate-800 hover:bg-slate-700 rounded-lg font-semibold transition-all hover:scale-105"
+            >
+              <Github size={20} />
+              GitHub
+            </a>
+            <a
+              href="https://www.linkedin.com/in/hafiz-muhammad-ahmad-b76304273/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 px-6 py-3 bg-blue-600 hover:bg-blue-700 rounded-lg font-semibold transition-all hover:scale-105"
+            >
+              <Linkedin size={20} />
+              LinkedIn
+            </a>
+            <a
+              href="mailto:mahmadimran383@gmail.com"
+              className="inline-flex items-center gap-2 px-6 py-3 bg-slate-700 hover:bg-slate-600 rounded-lg font-semibold transition-all hover:scale-105"
+            >
+              <Mail size={20} />
+              Email
+            </a>
+          </div>
+
+          {/* Contact Actions */}
           <div className="flex flex-col sm:flex-row justify-center gap-4">
             <a href="mailto:mahmadimran383@gmail.com" className="px-8 py-3 bg-blue-500 hover:bg-blue-600 rounded-full font-semibold transition-all hover:scale-105">
               Send Email
