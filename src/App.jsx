@@ -31,22 +31,26 @@ export default function Portfolio() {
     {
       title: "Adult Income Prediction Model",
       tech: "Python, Machine Learning",
-      description: "Created an ML model using preprocessing and feature engineering to predict income levels with high accuracy."
+      description: "Created an ML model using preprocessing and feature engineering to predict income levels with high accuracy.",
+      github: "https://github.com/Muhammad-Ahmad2511/ML-Project-for-Income-prediction"
     },
     {
-      title: "Electronics Inventory Dashboard",
+      title: "Electronics Inventory Management Dashboard",
       tech: "Power BI",
-      description: "Designed an interactive dashboard displaying stock levels, shortages, and inventory trends for data-driven decision making."
+      description: "Designed an interactive dashboard displaying stock levels, shortages, and inventory trends for data-driven decision making.",
+      github: "https://github.com/Muhammad-Ahmad2511/Electronics-Inventory-Management-Dashboard"
     },
     {
       title: "Eco Friendly Habit Tracker",
       tech: "C#",
-      description: "Developed a habit tracking app with user authentication, progress charts, reminders, and streak-based motivation features."
+      description: "Developed a habit tracking app with user authentication, progress charts, reminders, and streak-based motivation features.",
+      github: "https://github.com/Muhammad-Ahmad2511/Eco-friendly-habit-tracker"
     },
     {
-      title: "Hotel Management System",
-      tech: "C++, OOP",
-      description: "Built an OOP-based system for managing room bookings, reservations, and availability with efficient operations."
+      title: "Retail Inventory Analytics & Business Intelligence",
+      tech: "ETL, Data Warehousing, BI Dashboards",
+      description: "Designed a data warehouse and BI solution to analyze retail sales, inventory levels, pricing, discounts, seasonality, and regional performance using ETL pipelines and interactive dashboards.",
+      github: "https://github.com/Muhammad-Ahmad2511/retail-inventory-analytics-bi"
     }
   ];
 
@@ -260,7 +264,7 @@ CERTIFICATIONS
               <div className={`transition-all duration-1000 ${isTypingComplete ? 'opacity-100' : 'opacity-0'}`}>
                 <button onClick={handleDownloadCV} className="inline-flex items-center gap-2 px-8 py-3 bg-gradient-to-r from-blue-500 to-cyan-500 hover:from-blue-600 hover:to-cyan-600 rounded-full font-semibold transition-all hover:scale-105 hover:shadow-lg hover:shadow-blue-500/50">
                   <Download size={20} />
-                  Download Resume
+                  Download CV
                 </button>
               </div>
             </div>
@@ -313,7 +317,16 @@ CERTIFICATIONS
               <div key={index} className="bg-slate-800/50 backdrop-blur-sm p-6 rounded-xl border border-blue-500/20 hover:border-blue-500/40 transition-all duration-300 hover:scale-105 hover:shadow-xl hover:shadow-blue-500/20">
                 <h3 className="text-xl font-bold text-blue-400 mb-2">{project.title}</h3>
                 <p className="text-sm text-cyan-400 mb-3">{project.tech}</p>
-                <p className="text-slate-300">{project.description}</p>
+                <p className="text-slate-300 mb-4">{project.description}</p>
+                <a
+                  href={project.github}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 px-4 py-2 bg-slate-700 hover:bg-slate-600 rounded-lg text-sm font-semibold transition-all hover:scale-105"
+                >
+                  <Github size={16} />
+                  View on GitHub
+                </a>
               </div>
             ))}
           </div>
