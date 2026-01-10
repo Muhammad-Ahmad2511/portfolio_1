@@ -6,9 +6,6 @@ export default function Portfolio() {
   const [displayText, setDisplayText] = useState('');
   const [isTypingComplete, setIsTypingComplete] = useState(false);
   const fullText = "Muhammad Ahmad";
-  const [imageUrl, setImageUrl] = useState('');
-  const [cvFile, setCvFile] = useState(null);
-  const [showUploadPanel, setShowUploadPanel] = useState(false);
 
   useEffect(() => {
     let index = 0;
@@ -63,19 +60,11 @@ export default function Portfolio() {
   };
 
   const handleDownloadCV = () => {
-    // Prefer a permanent /cv.pdf in the public folder if present
     const publicCvUrl = '/cv.pdf';
     fetch(publicCvUrl, { method: 'HEAD' }).then(res => {
       if (res.ok) {
         const link = document.createElement('a');
         link.href = publicCvUrl;
-        link.download = 'Muhammad_Ahmad_CV.pdf';
-        document.body.appendChild(link);
-        link.click();
-        document.body.removeChild(link);
-      } else if (cvFile) {
-        const link = document.createElement('a');
-        link.href = cvFile;
         link.download = 'Muhammad_Ahmad_CV.pdf';
         document.body.appendChild(link);
         link.click();
@@ -116,16 +105,7 @@ CERTIFICATIONS
         window.URL.revokeObjectURL(url);
       }
     }).catch(() => {
-      // network error fallback
-      if (cvFile) {
-        const link = document.createElement('a');
-        link.href = cvFile;
-        link.download = 'Muhammad_Ahmad_CV.pdf';
-        document.body.appendChild(link);
-        link.click();
-        document.body.removeChild(link);
-      } else {
-        const cvContent = `MUHAMMAD AHMAD
+      const cvContent = `MUHAMMAD AHMAD
 Lahore, Pakistan | +92 3264498774 | mahmadimran383@gmail.com
 
 OBJECTIVE
@@ -149,43 +129,16 @@ CERTIFICATIONS
 • Deep Learning with PyTorch - DataCamp
 • IBM Machine Learning - Coursera`;
 
-        const blob = new Blob([cvContent], { type: 'text/plain' });
-        const url = window.URL.createObjectURL(blob);
-        const link = document.createElement('a');
-        link.href = url;
-        link.download = 'Muhammad_Ahmad_CV.pdf';
-        document.body.appendChild(link);
-        link.click();
-        document.body.removeChild(link);
-        window.URL.revokeObjectURL(url);
-      }
+      const blob = new Blob([cvContent], { type: 'text/plain' });
+      const url = window.URL.createObjectURL(blob);
+      const link = document.createElement('a');
+      link.href = url;
+      link.download = 'Muhammad_Ahmad_CV.pdf';
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+      window.URL.revokeObjectURL(url);
     });
-  };
-
-  const handleImageUpload = (e) => {
-    const file = e.target.files[0];
-    if (file && file.type.startsWith('image/')) {
-      const reader = new FileReader();
-      reader.onloadend = () => {
-        setImageUrl(reader.result);
-      };
-      reader.readAsDataURL(file);
-    } else {
-      alert('Please upload a valid image file');
-    }
-  };
-
-  const handleCVUpload = (e) => {
-    const file = e.target.files[0];
-    if (file && file.type === 'application/pdf') {
-      const reader = new FileReader();
-      reader.onloadend = () => {
-        setCvFile(reader.result);
-      };
-      reader.readAsDataURL(file);
-    } else {
-      alert('Please upload a valid PDF file');
-    }
   };
 
   return (
@@ -205,70 +158,6 @@ CERTIFICATIONS
           animation: fadeInUp 0.6s ease-out;
         }
       `}</style>
-
-      {/* Upload Button */}
-      <button
-        onClick={() => setShowUploadPanel(!showUploadPanel)}
-        className="fixed bottom-6 right-6 z-50 p-4 bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 rounded-full shadow-lg hover:scale-110 transition-all"
-        title="Upload Photo & CV"
-      >
-        <Download size={24} />
-      </button>
-
-      {/* Upload Panel */}
-      {showUploadPanel && (
-        <div className="fixed inset-0 z-40 flex items-center justify-center bg-black/50 backdrop-blur-sm">
-          <div className="bg-slate-800 border border-blue-500/30 rounded-2xl p-8 max-w-md w-full mx-4 shadow-2xl">
-            <div className="flex justify-between items-center mb-6">
-              <h3 className="text-2xl font-bold text-blue-400">Upload Files</h3>
-              <button onClick={() => setShowUploadPanel(false)} className="p-2 hover:bg-slate-700 rounded-lg">
-                <X size={24} />
-              </button>
-            </div>
-
-            <div className="mb-6">
-              <label className="block text-lg font-semibold mb-3">Profile Photo</label>
-              <div className="border-2 border-dashed border-blue-500/30 rounded-xl p-6 text-center hover:border-blue-500/50 transition-all">
-                <input type="file" accept="image/*" onChange={handleImageUpload} className="hidden" id="imageUpload" />
-                <label htmlFor="imageUpload" className="cursor-pointer">
-                  {imageUrl ? (
-                    <div>
-                      <img src={imageUrl} alt="Preview" className="w-32 h-32 object-cover rounded-full mx-auto mb-3" />
-                      <p className="text-green-400 text-sm">✓ Image uploaded!</p>
-                    </div>
-                  ) : (
-                    <div>
-                      <p className="text-slate-300 mb-1">Click to upload image</p>
-                      <p className="text-slate-500 text-sm">JPG, PNG, or GIF</p>
-                    </div>
-                  )}
-                </label>
-              </div>
-            </div>
-
-            <div className="mb-6">
-              <label className="block text-lg font-semibold mb-3">CV (PDF)</label>
-              <div className="border-2 border-dashed border-blue-500/30 rounded-xl p-6 text-center hover:border-blue-500/50 transition-all">
-                <input type="file" accept=".pdf" onChange={handleCVUpload} className="hidden" id="cvUpload" />
-                <label htmlFor="cvUpload" className="cursor-pointer">
-                  {cvFile ? (
-                    <p className="text-green-400 text-sm">✓ CV uploaded!</p>
-                  ) : (
-                    <div>
-                      <p className="text-slate-300 mb-1">Click to upload CV</p>
-                      <p className="text-slate-500 text-sm">PDF format only</p>
-                    </div>
-                  )}
-                </label>
-              </div>
-            </div>
-
-            <button onClick={() => setShowUploadPanel(false)} className="w-full py-3 bg-gradient-to-r from-blue-500 to-cyan-500 rounded-lg font-semibold">
-              Done
-            </button>
-          </div>
-        </div>
-      )}
 
       {/* Navigation */}
       <nav className="fixed top-0 w-full bg-slate-900/80 backdrop-blur-md z-50 border-b border-blue-500/20">
@@ -304,8 +193,7 @@ CERTIFICATIONS
           <div className="flex flex-col md:flex-row items-center gap-12 mb-8">
             <div className="relative flex-shrink-0">
               <div className="relative w-64 h-64 rounded-full overflow-hidden border-4 border-blue-400 shadow-2xl shadow-blue-500/50">
-                {/* Use uploaded image if present, otherwise use permanent /profile.jpg in public */}
-                <img src={imageUrl || '/profile.jpg'} alt="Muhammad Ahmad" className="w-full h-full object-cover" />
+                <img src="/profile.jpg" alt="Muhammad Ahmad" className="w-full h-full object-cover" />
               </div>
               <div className="absolute -bottom-2 -right-2 bg-blue-500 text-white px-4 py-2 rounded-full text-sm font-semibold shadow-lg">
                 Data Scientist
@@ -339,34 +227,33 @@ CERTIFICATIONS
               </div>
 
               <div className={`flex flex-wrap justify-center md:justify-start gap-4 mb-6 transition-all duration-1000 ${isTypingComplete ? 'opacity-100' : 'opacity-0'}`}>
-  <a
-    href="https://github.com/Muhammad-Ahmad2511"
-    target="_blank"
-    rel="noopener noreferrer"
-    className="inline-flex items-center gap-2 px-6 py-3 bg-slate-800 hover:bg-slate-700 rounded-lg font-semibold transition-all hover:scale-105"
-  >
-    <Github size={20} />
-    GitHub
-  </a>
-  <a
-    href="https://www.linkedin.com/in/hafiz-muhammad-ahmad-b76304273/"
-    target="_blank"
-    rel="noopener noreferrer"
-    className="inline-flex items-center gap-2 px-6 py-3 bg-blue-600 hover:bg-blue-700 rounded-lg font-semibold transition-all hover:scale-105"
-  >
-    <Linkedin size={20} />
-    LinkedIn
-  </a>
-  <a
-    href="mailto:mahmadimran383@gmail.com"
-    className="inline-flex items-center gap-2 px-6 py-3 bg-slate-700 hover:bg-slate-600 rounded-lg font-semibold transition-all hover:scale-105"
-  >
-    <Mail size={20} />
-    Email
-  </a>
-</div>
+                <a
+                  href="https://github.com/Muhammad-Ahmad2511"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 px-6 py-3 bg-slate-800 hover:bg-slate-700 rounded-lg font-semibold transition-all hover:scale-105"
+                >
+                  <Github size={20} />
+                  GitHub
+                </a>
+                <a
+                  href="https://www.linkedin.com/in/hafiz-muhammad-ahmad-b76304273/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 px-6 py-3 bg-blue-600 hover:bg-blue-700 rounded-lg font-semibold transition-all hover:scale-105"
+                >
+                  <Linkedin size={20} />
+                  LinkedIn
+                </a>
+                <a
+                  href="mailto:mahmadimran383@gmail.com"
+                  className="inline-flex items-center gap-2 px-6 py-3 bg-slate-700 hover:bg-slate-600 rounded-lg font-semibold transition-all hover:scale-105"
+                >
+                  <Mail size={20} />
+                  Email
+                </a>
+              </div>
 
-              
               <div className={`transition-all duration-1000 ${isTypingComplete ? 'opacity-100' : 'opacity-0'}`}>
                 <button onClick={handleDownloadCV} className="inline-flex items-center gap-2 px-8 py-3 bg-gradient-to-r from-blue-500 to-cyan-500 hover:from-blue-600 hover:to-cyan-600 rounded-full font-semibold transition-all hover:scale-105 hover:shadow-lg hover:shadow-blue-500/50">
                   <Download size={20} />
