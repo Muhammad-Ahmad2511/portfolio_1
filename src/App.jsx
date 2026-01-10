@@ -350,15 +350,14 @@ CERTIFICATIONS
           </div>
 
           <div className="bg-slate-800/50 backdrop-blur-sm p-8 rounded-xl border border-blue-500/20">
-            <h3 className="text-2xl font-bold text-blue-400 mb-6">Certifications & Awards</h3>
+            <h3 className="text-2xl font-bold text-blue-400 mb-6">Certifications</h3>
             <div className="grid md:grid-cols-2 gap-4">
               {[
                 "Feature Engineering for Machine Learning — DataCamp",
                 "Deep Learning with PyTorch — DataCamp",
                 "IBM Machine Learning — Coursera",
-                "Dean's List Distinction — FAST-NUCES",
-                "Python Coder Badge — Kaggle",
-                "Programming Competition Participant"
+                "Prompt Engineering with the OpenAI API — DataCamp",
+                "Working with the OpenAI API — DataCamp"
               ].map((cert, index) => (
                 <div key={index} className="flex items-start gap-2">
                   <Award size={20} className="text-cyan-400 mt-1 flex-shrink-0" />
