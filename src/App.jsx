@@ -52,11 +52,14 @@ export default function Portfolio() {
 
   const skills = {
     "Programming": ["C", "C++", "Python", "C#", "SQL"],
-    "ML / AI": ["Regression", "Classification", "Clustering", "NLP", "Feature Engineering"],
-    "Data Analysis": ["EDA", "Data Cleaning", "Statistical Analysis", "Image Processing"],
-    "Databases": ["PostgreSQL", "SQL Server", "Data Warehousing", "ETL"],
+    "ML / AI": ["Regression", "Classification", "Clustering", "Dimensionality Reduction", "Feature Engineering", "Data Mining", "NLP"],
+    "EDA / Analysis": ["Exploratory Data Analysis", "Data Cleaning", "Statistical Analysis", "Probabilistic Analysis", "Image Processing"],
+    "Data / DB": ["PostgreSQL", "SQL Server", "Data Warehousing", "ETL", "SQL Optimization"],
     "Visualization": ["Matplotlib", "Seaborn", "Power BI", "Tableau"],
-    "Deep Learning": ["PyTorch", "ANN", "RNN"]
+    "Deep Learning": ["PyTorch", "ANN", "RNN"],
+    "Tools": ["Jupyter", "VS Code", "Visual Studio", "Google Colab", "Git/GitHub"],
+    "Soft Skills": ["Analytical Thinking", "Collaboration", "Adaptability", "Problem Solving"],
+    "Other": ["Web Scraping", "Microsoft Office"]
   };
 
   const handleDownloadCV = () => {
