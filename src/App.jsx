@@ -353,13 +353,13 @@ CERTIFICATIONS
             <h3 className="text-2xl font-bold text-blue-400 mb-6">Certifications</h3>
             <div className="grid md:grid-cols-2 gap-4">
               {[
-                { name: "Feature Engineering for Machine Learning — DataCamp", link: "#" },
-                { name: "Deep Learning with PyTorch — DataCamp", link: "#" },
-                { name: "IBM Machine Learning — Coursera", link: "#" },
-                { name: "Prompt Engineering with the OpenAI API — DataCamp", link: "#" },
+                { name: "Feature Engineering for Machine Learning — DataCamp", link: "https://www.datacamp.com/statement-of-accomplishment/course/2c0a7a8b961475cb1c77d0a0289c5a3d870e6c0b?raw=1" },
+                { name: "Deep Learning with PyTorch — DataCamp", link: "https://www.datacamp.com/statement-of-accomplishment/course/9eabbc32e0ca84d8f4a892be28c99fa1c06c19d6?raw=1" },
+                { name: "IBM Machine Learning — Coursera", link: "https://www.coursera.org/account/accomplishments/specialization/certificate/SJFWK6SVPRFA" },
+                { name: "Prompt Engineering with the OpenAI API — DataCamp", link: "https://www.datacamp.com/statement-of-accomplishment/course/e18d6c6bb8e10cd4cd046e0be8e8f8a8cded9148?raw=1" },
                 { name: "Working with the OpenAI API — DataCamp", link: "https://www.datacamp.com/statement-of-accomplishment/course/b135f4db28f88d7627f1227a46517ee79d529882?raw=1" },
-                { name: "Deep Learning and Reinforcement Learning — DataCamp", link: "#" },
-                { name: "Exploratory Data Analysis for Machine Learning — Coursera", link: "#" }
+                { name: "Deep Learning and Reinforcement Learning — Coursera", link: "https://www.coursera.org/account/accomplishments/certificate/M7W3YP1FABUB" },
+                { name: "Exploratory Data Analysis for Machine Learning — Coursera", link: "https://www.coursera.org/account/accomplishments/certificate/C8RXZNE7K3SC" }
               ].map((cert, index) => (
                 <a 
                   key={index} 
