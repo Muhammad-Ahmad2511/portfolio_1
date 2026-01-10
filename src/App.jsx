@@ -357,7 +357,8 @@ CERTIFICATIONS
                 "Deep Learning with PyTorch — DataCamp",
                 "IBM Machine Learning — Coursera",
                 "Prompt Engineering with the OpenAI API — DataCamp",
-                "Working with the OpenAI API — DataCamp"
+                "Working with the OpenAI API — DataCamp",
+                "Deep Learning and Reinforcement Learning — DataCamp"
               ].map((cert, index) => (
                 <div key={index} className="flex items-start gap-2">
                   <Award size={20} className="text-cyan-400 mt-1 flex-shrink-0" />
