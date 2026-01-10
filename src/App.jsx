@@ -283,11 +283,20 @@ CERTIFICATIONS
               </div>
               <span className="text-slate-400 mt-2 md:mt-0">Jun 2025 – Aug 2025</span>
             </div>
-            <ul className="space-y-2 text-slate-300">
+            <ul className="space-y-2 text-slate-300 mb-4">
               <li>• Participated in backend automation and integration tasks using C# and SAGE 50</li>
               <li>• Assisted in exploring RESTful API workflows and system configurations</li>
               <li>• Collaborated remotely via Microsoft Teams for task coordination</li>
             </ul>
+            <a 
+              href="/certificate.jpg" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-cyan-500 to-blue-500 hover:from-cyan-600 hover:to-blue-600 rounded-lg font-semibold transition-all hover:scale-105 hover:shadow-lg hover:shadow-cyan-500/50"
+            >
+              <Award size={20} />
+              View Internship Certificate
+            </a>
           </div>
         </div>
       </section>
