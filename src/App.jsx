@@ -357,7 +357,7 @@ CERTIFICATIONS
                 { name: "Deep Learning with PyTorch — DataCamp", link: "#" },
                 { name: "IBM Machine Learning — Coursera", link: "#" },
                 { name: "Prompt Engineering with the OpenAI API — DataCamp", link: "#" },
-                { name: "Working with the OpenAI API — DataCamp", link: "#" },
+                { name: "Working with the OpenAI API — DataCamp", link: "https://www.datacamp.com/statement-of-accomplishment/course/b135f4db28f88d7627f1227a46517ee79d529882?raw=1" },
                 { name: "Deep Learning and Reinforcement Learning — DataCamp", link: "#" },
                 { name: "Exploratory Data Analysis for Machine Learning — Coursera", link: "#" }
               ].map((cert, index) => (
