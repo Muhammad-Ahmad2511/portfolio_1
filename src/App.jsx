@@ -1,10 +1,12 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Github, Linkedin, Mail, Phone, MapPin, Award, Briefcase, GraduationCap, Code, Brain, Menu, X, Download } from 'lucide-react';
 
 export default function Portfolio() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [displayText, setDisplayText] = useState('');
   const [isTypingComplete, setIsTypingComplete] = useState(false);
+  const [activeSection, setActiveSection] = useState('about');
+  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   const fullText = "Muhammad Ahmad";
 
   useEffect(() => {
@@ -20,6 +22,35 @@ export default function Portfolio() {
     }, 100);
 
     return () => clearInterval(typingInterval);
+  }, []);
+
+  // Scroll animation observer
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('show');
+            setActiveSection(entry.target.id);
+          }
+        });
+      },
+      { threshold: 0.2 }
+    );
+
+    const sections = document.querySelectorAll('.scroll-section');
+    sections.forEach((section) => observer.observe(section));
+
+    return () => sections.forEach((section) => observer.unobserve(section));
+  }, []);
+
+  // Mouse tracking for background effect
+  useEffect(() => {
+    const handleMouseMove = (e) => {
+      setMousePosition({ x: e.clientX, y: e.clientY });
+    };
+    window.addEventListener('mousemove', handleMouseMove);
+    return () => window.removeEventListener('mousemove', handleMouseMove);
   }, []);
 
   const scrollToSection = (id) => {
@@ -149,7 +180,7 @@ CERTIFICATIONS
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-blue-900 to-slate-900 text-white">
+    <div className="min-h-screen bg-slate-900 text-white overflow-x-hidden relative">
       <style>{`
         @keyframes fadeInUp {
           from {
@@ -161,10 +192,111 @@ CERTIFICATIONS
             transform: translateY(0);
           }
         }
+        
+        @keyframes gradientShift {
+          0% {
+            background-position: 0% 50%;
+          }
+          50% {
+            background-position: 100% 50%;
+          }
+          100% {
+            background-position: 0% 50%;
+          }
+        }
+        
+        @keyframes float {
+          0%, 100% {
+            transform: translateY(0px);
+          }
+          50% {
+            transform: translateY(-20px);
+          }
+        }
+
         .animate-fadeInUp {
           animation: fadeInUp 0.6s ease-out;
         }
+
+        .scroll-section {
+          opacity: 0;
+          transform: translateY(50px);
+          transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+        }
+
+        .scroll-section.show {
+          opacity: 1;
+          transform: translateY(0);
+        }
+
+        .stagger-item {
+          opacity: 0;
+          transform: translateY(30px);
+          transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+
+        .scroll-section.show .stagger-item {
+          opacity: 1;
+          transform: translateY(0);
+        }
+
+        .scroll-section.show .stagger-item:nth-child(1) { transition-delay: 0.1s; }
+        .scroll-section.show .stagger-item:nth-child(2) { transition-delay: 0.2s; }
+        .scroll-section.show .stagger-item:nth-child(3) { transition-delay: 0.3s; }
+        .scroll-section.show .stagger-item:nth-child(4) { transition-delay: 0.4s; }
+        .scroll-section.show .stagger-item:nth-child(5) { transition-delay: 0.5s; }
+        .scroll-section.show .stagger-item:nth-child(6) { transition-delay: 0.6s; }
+
+        .animated-bg {
+          background: linear-gradient(135deg, #0f172a 0%, #1e3a8a 25%, #0f172a 50%, #1e40af 75%, #0f172a 100%);
+          background-size: 400% 400%;
+          animation: gradientShift 15s ease infinite;
+        }
+
+        .tilt-card {
+          transform-style: preserve-3d;
+          transition: transform 0.3s ease;
+        }
+
+        .tilt-card:hover {
+          transform: scale(1.05);
+        }
+
+        .profile-float {
+          animation: float 6s ease-in-out infinite;
+        }
+
+        .nav-indicator {
+          position: relative;
+        }
+
+        .nav-indicator::after {
+          content: '';
+          position: absolute;
+          bottom: -4px;
+          left: 0;
+          width: 0;
+          height: 2px;
+          background: linear-gradient(90deg, #3b82f6, #06b6d4);
+          transition: width 0.3s ease;
+        }
+
+        .nav-indicator.active::after,
+        .nav-indicator:hover::after {
+          width: 100%;
+        }
+
+        .glow-on-hover {
+          transition: box-shadow 0.3s ease;
+        }
+
+        .glow-on-hover:hover {
+          box-shadow: 0 0 20px rgba(59, 130, 246, 0.5);
+        }
       `}</style>
+
+      {/* Animated Background */}
+      <div className="fixed inset-0 animated-bg -z-10"></div>
 
       {/* Navigation */}
       <nav className="fixed top-0 w-full bg-slate-900/80 backdrop-blur-md z-50 border-b border-blue-500/20">
@@ -173,7 +305,11 @@ CERTIFICATIONS
             <h1 className="text-2xl font-bold bg-gradient-to-r from-blue-400 to-cyan-400 bg-clip-text text-transparent">MA</h1>
             <div className="hidden md:flex gap-8">
               {['About', 'Experience', 'Projects', 'Skills', 'Education', 'Contact'].map(item => (
-                <button key={item} onClick={() => scrollToSection(item.toLowerCase())} className="hover:text-blue-400 transition-colors">
+                <button 
+                  key={item} 
+                  onClick={() => scrollToSection(item.toLowerCase())} 
+                  className={`nav-indicator hover:text-blue-400 transition-colors ${activeSection === item.toLowerCase() ? 'active text-blue-400' : ''}`}
+                >
                   {item}
                 </button>
               ))}
@@ -195,11 +331,11 @@ CERTIFICATIONS
       </nav>
 
       {/* Hero Section */}
-      <section id="about" className="pt-32 pb-20 px-6">
+      <section id="about" className="pt-32 pb-20 px-6 scroll-section show">
         <div className="max-w-6xl mx-auto">
           <div className="flex flex-col md:flex-row items-center gap-12 mb-8">
-            <div className="relative flex-shrink-0">
-              <div className="relative w-64 h-64 rounded-full overflow-hidden border-4 border-blue-400 shadow-2xl shadow-blue-500/50">
+            <div className="relative flex-shrink-0 profile-float">
+              <div className="relative w-64 h-64 rounded-full overflow-hidden border-4 border-blue-400 shadow-2xl shadow-blue-500/50 glow-on-hover">
                 <img src="/profile.jpg" alt="Muhammad Ahmad" className="w-full h-full object-cover" />
               </div>
               <div className="absolute -bottom-2 -right-2 bg-blue-500 text-white px-4 py-2 rounded-full text-sm font-semibold shadow-lg">
@@ -234,13 +370,13 @@ CERTIFICATIONS
       </section>
 
       {/* Experience */}
-      <section id="experience" className="py-20 px-6 bg-slate-900/50">
+      <section id="experience" className="py-20 px-6 scroll-section">
         <div className="max-w-6xl mx-auto">
           <h2 className="text-4xl font-bold mb-12 flex items-center gap-3">
             <Briefcase className="text-blue-400" />
             Experience
           </h2>
-          <div className="bg-slate-800/50 backdrop-blur-sm p-8 rounded-xl border border-blue-500/20 hover:border-blue-500/40 transition-all">
+          <div className="stagger-item bg-slate-800/50 backdrop-blur-sm p-8 rounded-xl border border-blue-500/20 hover:border-blue-500/40 transition-all glow-on-hover">
             <div className="flex flex-col md:flex-row md:justify-between md:items-start mb-4">
               <div>
                 <h3 className="text-2xl font-bold text-blue-400">Technical Intern</h3>
@@ -267,7 +403,7 @@ CERTIFICATIONS
       </section>
 
       {/* Projects */}
-      <section id="projects" className="py-20 px-6">
+      <section id="projects" className="py-20 px-6 scroll-section">
         <div className="max-w-6xl mx-auto">
           <h2 className="text-4xl font-bold mb-12 flex items-center gap-3">
             <Code className="text-blue-400" />
@@ -275,7 +411,7 @@ CERTIFICATIONS
           </h2>
           <div className="grid md:grid-cols-2 gap-6">
             {projects.map((project, index) => (
-              <div key={index} className="bg-slate-800/50 backdrop-blur-sm p-6 rounded-xl border border-blue-500/20 hover:border-blue-500/40 transition-all duration-300 hover:scale-105 hover:shadow-xl hover:shadow-blue-500/20">
+              <div key={index} className="stagger-item tilt-card bg-slate-800/50 backdrop-blur-sm p-6 rounded-xl border border-blue-500/20 hover:border-blue-500/40 transition-all duration-300 hover:shadow-xl hover:shadow-blue-500/20">
                 <h3 className="text-xl font-bold text-blue-400 mb-2">{project.title}</h3>
                 <p className="text-sm text-cyan-400 mb-3">{project.tech}</p>
                 <p className="text-slate-300 mb-4">{project.description}</p>
@@ -295,19 +431,19 @@ CERTIFICATIONS
       </section>
 
       {/* Skills */}
-      <section id="skills" className="py-20 px-6 bg-slate-900/50">
+      <section id="skills" className="py-20 px-6 scroll-section">
         <div className="max-w-6xl mx-auto">
           <h2 className="text-4xl font-bold mb-12 flex items-center gap-3">
             <Brain className="text-blue-400" />
             Technical Skills
           </h2>
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {Object.entries(skills).map(([category, items]) => (
-              <div key={category} className="bg-slate-800/50 backdrop-blur-sm p-6 rounded-xl border border-blue-500/20">
+            {Object.entries(skills).map(([category, items], index) => (
+              <div key={category} className="stagger-item bg-slate-800/50 backdrop-blur-sm p-6 rounded-xl border border-blue-500/20 glow-on-hover transition-all">
                 <h3 className="text-lg font-bold text-blue-400 mb-4">{category}</h3>
                 <div className="flex flex-wrap gap-2">
-                  {items.map((skill, index) => (
-                    <span key={index} className="px-3 py-1 bg-blue-500/20 rounded-full text-sm text-slate-300">
+                  {items.map((skill, idx) => (
+                    <span key={idx} className="px-3 py-1 bg-blue-500/20 rounded-full text-sm text-slate-300 hover:bg-blue-500/30 transition-colors">
                       {skill}
                     </span>
                   ))}
@@ -319,13 +455,13 @@ CERTIFICATIONS
       </section>
 
       {/* Education */}
-      <section id="education" className="py-20 px-6">
+      <section id="education" className="py-20 px-6 scroll-section">
         <div className="max-w-6xl mx-auto">
           <h2 className="text-4xl font-bold mb-12 flex items-center gap-3">
             <GraduationCap className="text-blue-400" />
             Education & Certifications
           </h2>
-          <div className="bg-slate-800/50 backdrop-blur-sm p-8 rounded-xl border border-blue-500/20 mb-8">
+          <div className="stagger-item bg-slate-800/50 backdrop-blur-sm p-8 rounded-xl border border-blue-500/20 mb-8 glow-on-hover">
             <div className="flex flex-col md:flex-row md:justify-between md:items-start">
               <div>
                 <h3 className="text-2xl font-bold text-blue-400">Bachelor of Science in Data Science</h3>
@@ -335,7 +471,7 @@ CERTIFICATIONS
             </div>
           </div>
 
-          <div className="bg-slate-800/50 backdrop-blur-sm p-8 rounded-xl border border-blue-500/20">
+          <div className="stagger-item bg-slate-800/50 backdrop-blur-sm p-8 rounded-xl border border-blue-500/20 glow-on-hover">
             <h3 className="text-2xl font-bold text-blue-400 mb-6">Certifications</h3>
             <div className="grid md:grid-cols-2 gap-4">
               {[
@@ -364,7 +500,7 @@ CERTIFICATIONS
       </section>
 
       {/* Contact */}
-      <section id="contact" className="py-20 px-6 bg-slate-900/50">
+      <section id="contact" className="py-20 px-6 scroll-section">
         <div className="max-w-6xl mx-auto text-center">
           <h2 className="text-4xl font-bold mb-8">Let's Connect</h2>
           <p className="text-xl text-slate-300 mb-8">
@@ -377,7 +513,7 @@ CERTIFICATIONS
               href="https://github.com/Muhammad-Ahmad2511"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 px-6 py-3 bg-slate-800 hover:bg-slate-700 rounded-lg font-semibold transition-all hover:scale-105"
+              className="stagger-item inline-flex items-center gap-2 px-6 py-3 bg-slate-800 hover:bg-slate-700 rounded-lg font-semibold transition-all hover:scale-105 glow-on-hover"
             >
               <Github size={20} />
               GitHub
@@ -386,14 +522,14 @@ CERTIFICATIONS
               href="https://www.linkedin.com/in/hafiz-muhammad-ahmad-b76304273/"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 px-6 py-3 bg-blue-600 hover:bg-blue-700 rounded-lg font-semibold transition-all hover:scale-105"
+              className="stagger-item inline-flex items-center gap-2 px-6 py-3 bg-blue-600 hover:bg-blue-700 rounded-lg font-semibold transition-all hover:scale-105 glow-on-hover"
             >
               <Linkedin size={20} />
               LinkedIn
             </a>
             <a
               href="mailto:mahmadimran383@gmail.com"
-              className="inline-flex items-center gap-2 px-6 py-3 bg-slate-700 hover:bg-slate-600 rounded-lg font-semibold transition-all hover:scale-105"
+              className="stagger-item inline-flex items-center gap-2 px-6 py-3 bg-slate-700 hover:bg-slate-600 rounded-lg font-semibold transition-all hover:scale-105 glow-on-hover"
             >
               <Mail size={20} />
               Email
@@ -401,7 +537,7 @@ CERTIFICATIONS
           </div>
 
           {/* Contact Actions */}
-          <div className="flex justify-center">
+          <div className="flex justify-center stagger-item">
             <a href="tel:+923264498774" className="px-8 py-3 bg-gradient-to-r from-blue-500 to-cyan-500 hover:from-blue-600 hover:to-cyan-600 rounded-full font-semibold transition-all hover:scale-105 hover:shadow-lg hover:shadow-blue-500/50">
               Call Me
             </a>
