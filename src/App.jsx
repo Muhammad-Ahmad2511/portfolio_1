@@ -7,7 +7,27 @@ export default function Portfolio() {
   const [isTypingComplete, setIsTypingComplete] = useState(false);
   const [activeSection, setActiveSection] = useState('about');
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
+  const [particles, setParticles] = useState([]);
   const fullText = "Muhammad Ahmad";
+
+  // Generate particles
+  useEffect(() => {
+    const generateParticles = () => {
+      const newParticles = [];
+      for (let i = 0; i < 40; i++) {
+        newParticles.push({
+          id: i,
+          x: Math.random() * 100,
+          y: Math.random() * 100,
+          size: Math.random() * 6 + 3,
+          duration: Math.random() * 15 + 10,
+          delay: Math.random() * 10
+        });
+      }
+      setParticles(newParticles);
+    };
+    generateParticles();
+  }, []);
 
   useEffect(() => {
     let index = 0;
@@ -293,10 +313,66 @@ CERTIFICATIONS
         .glow-on-hover:hover {
           box-shadow: 0 0 20px rgba(59, 130, 246, 0.5);
         }
+
+        .particle {
+          position: fixed;
+          background: radial-gradient(circle, rgba(59, 130, 246, 0.6) 0%, rgba(6, 182, 212, 0.3) 50%, transparent 100%);
+          border-radius: 50%;
+          pointer-events: none;
+          filter: blur(1px);
+        }
+
+        @keyframes float-particle {
+          0% {
+            transform: translateY(100vh) translateX(0);
+            opacity: 0;
+          }
+          10% {
+            opacity: 0.8;
+          }
+          90% {
+            opacity: 0.8;
+          }
+          100% {
+            transform: translateY(-10vh) translateX(50px);
+            opacity: 0;
+          }
+        }
+
+        .connection-line {
+          position: absolute;
+          height: 1px;
+          background: linear-gradient(90deg, transparent, rgba(59, 130, 246, 0.3), transparent);
+          pointer-events: none;
+          animation: fade-in-out 3s ease-in-out infinite;
+        }
+
+        @keyframes fade-in-out {
+          0%, 100% { opacity: 0; }
+          50% { opacity: 1; }
+        }
       `}</style>
 
       {/* Animated Background */}
       <div className="fixed inset-0 animated-bg -z-10"></div>
+
+      {/* Floating Particles */}
+      <div className="fixed inset-0 overflow-hidden pointer-events-none" style={{ zIndex: 1 }}>
+        {particles.map((particle) => (
+          <div
+            key={particle.id}
+            className="particle"
+            style={{
+              left: `${particle.x}%`,
+              bottom: '0',
+              width: `${particle.size}px`,
+              height: `${particle.size}px`,
+              animation: `float-particle ${particle.duration}s linear infinite`,
+              animationDelay: `${particle.delay}s`
+            }}
+          />
+        ))}
+      </div>
 
       {/* Navigation */}
       <nav className="fixed top-0 w-full bg-slate-900/80 backdrop-blur-md z-50 border-b border-blue-500/20">
@@ -471,30 +547,39 @@ CERTIFICATIONS
             </div>
           </div>
 
-          <div className="stagger-item bg-slate-800/50 backdrop-blur-sm p-8 rounded-xl border border-blue-500/20 glow-on-hover">
-            <h3 className="text-2xl font-bold text-blue-400 mb-6">Certifications</h3>
-            <div className="grid md:grid-cols-2 gap-4">
-              {[
-                { name: "Feature Engineering for Machine Learning — DataCamp", link: "https://www.datacamp.com/statement-of-accomplishment/course/2c0a7a8b961475cb1c77d0a0289c5a3d870e6c0b?raw=1" },
-                { name: "Deep Learning with PyTorch — DataCamp", link: "https://www.datacamp.com/statement-of-accomplishment/course/9eabbc32e0ca84d8f4a892be28c99fa1c06c19d6?raw=1" },
-                { name: "IBM Machine Learning — Coursera", link: "https://www.coursera.org/account/accomplishments/specialization/certificate/SJFWK6SVPRFA" },
-                { name: "Prompt Engineering with the OpenAI API — DataCamp", link: "https://www.datacamp.com/statement-of-accomplishment/course/e18d6c6bb8e10cd4cd046e0be8e8f8a8cded9148?raw=1" },
-                { name: "Working with the OpenAI API — DataCamp", link: "https://www.datacamp.com/statement-of-accomplishment/course/b135f4db28f88d7627f1227a46517ee79d529882?raw=1" },
-                { name: "Deep Learning and Reinforcement Learning — Coursera", link: "https://www.coursera.org/account/accomplishments/certificate/M7W3YP1FABUB" },
-                { name: "Exploratory Data Analysis for Machine Learning — Coursera", link: "https://www.coursera.org/account/accomplishments/certificate/C8RXZNE7K3SC" }
-              ].map((cert, index) => (
-                <a 
-                  key={index} 
-                  href={cert.link}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex items-start gap-2 hover:bg-slate-700/30 p-2 rounded-lg transition-all group"
-                >
-                  <Award size={20} className="text-cyan-400 mt-1 flex-shrink-0 group-hover:scale-110 transition-transform" />
-                  <span className="text-slate-300 group-hover:text-blue-400 transition-colors">{cert.name}</span>
-                </a>
-              ))}
-            </div>
+          <h3 className="text-2xl font-bold text-blue-400 mb-6">Certifications</h3>
+          <div className="grid md:grid-cols-2 gap-6">
+            {[
+              { name: "Feature Engineering for Machine Learning", platform: "DataCamp", link: "https://www.datacamp.com/statement-of-accomplishment/course/2c0a7a8b961475cb1c77d0a0289c5a3d870e6c0b?raw=1" },
+              { name: "Deep Learning with PyTorch", platform: "DataCamp", link: "https://www.datacamp.com/statement-of-accomplishment/course/9eabbc32e0ca84d8f4a892be28c99fa1c06c19d6?raw=1" },
+              { name: "IBM Machine Learning", platform: "Coursera", link: "https://www.coursera.org/account/accomplishments/specialization/certificate/SJFWK6SVPRFA" },
+              { name: "Prompt Engineering with OpenAI API", platform: "DataCamp", link: "https://www.datacamp.com/statement-of-accomplishment/course/e18d6c6bb8e10cd4cd046e0be8e8f8a8cded9148?raw=1" },
+              { name: "Working with the OpenAI API", platform: "DataCamp", link: "https://www.datacamp.com/statement-of-accomplishment/course/b135f4db28f88d7627f1227a46517ee79d529882?raw=1" },
+              { name: "Deep Learning and Reinforcement Learning", platform: "Coursera", link: "https://www.coursera.org/account/accomplishments/certificate/M7W3YP1FABUB" },
+              { name: "Exploratory Data Analysis for ML", platform: "Coursera", link: "https://www.coursera.org/account/accomplishments/certificate/C8RXZNE7K3SC" }
+            ].map((cert, index) => (
+              <a 
+                key={index} 
+                href={cert.link}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="stagger-item bg-slate-800/50 backdrop-blur-sm p-6 rounded-xl border border-blue-500/20 hover:border-blue-500/40 transition-all glow-on-hover group"
+              >
+                <div className="flex items-start gap-3 mb-3">
+                  <Award size={24} className="text-cyan-400 flex-shrink-0 group-hover:scale-110 transition-transform" />
+                  <div>
+                    <h4 className="text-lg font-bold text-slate-200 group-hover:text-blue-400 transition-colors mb-1">{cert.name}</h4>
+                    <p className="text-sm text-slate-400">{cert.platform}</p>
+                  </div>
+                </div>
+                <div className="flex items-center gap-2 text-sm text-cyan-400 group-hover:text-cyan-300">
+                  <span>View Certificate</span>
+                  <svg className="w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                  </svg>
+                </div>
+              </a>
+            ))}
           </div>
         </div>
       </section>
