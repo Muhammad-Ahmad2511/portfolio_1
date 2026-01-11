@@ -14,14 +14,14 @@ export default function Portfolio() {
   useEffect(() => {
     const generateParticles = () => {
       const newParticles = [];
-      for (let i = 0; i < 30; i++) {
+      for (let i = 0; i < 40; i++) {
         newParticles.push({
           id: i,
           x: Math.random() * 100,
           y: Math.random() * 100,
-          size: Math.random() * 4 + 2,
-          duration: Math.random() * 20 + 15,
-          delay: Math.random() * 5
+          size: Math.random() * 6 + 3,
+          duration: Math.random() * 15 + 10,
+          delay: Math.random() * 10
         });
       }
       setParticles(newParticles);
@@ -315,11 +315,11 @@ CERTIFICATIONS
         }
 
         .particle {
-          position: absolute;
-          background: radial-gradient(circle, rgba(59, 130, 246, 0.8) 0%, rgba(6, 182, 212, 0.4) 50%, transparent 100%);
+          position: fixed;
+          background: radial-gradient(circle, rgba(59, 130, 246, 0.6) 0%, rgba(6, 182, 212, 0.3) 50%, transparent 100%);
           border-radius: 50%;
           pointer-events: none;
-          animation: float-particle linear infinite;
+          filter: blur(1px);
         }
 
         @keyframes float-particle {
@@ -328,13 +328,13 @@ CERTIFICATIONS
             opacity: 0;
           }
           10% {
-            opacity: 1;
+            opacity: 0.8;
           }
           90% {
-            opacity: 1;
+            opacity: 0.8;
           }
           100% {
-            transform: translateY(-100px) translateX(var(--drift));
+            transform: translateY(-10vh) translateX(50px);
             opacity: 0;
           }
         }
@@ -357,18 +357,18 @@ CERTIFICATIONS
       <div className="fixed inset-0 animated-bg -z-10"></div>
 
       {/* Floating Particles */}
-      <div className="fixed inset-0 overflow-hidden pointer-events-none -z-10">
+      <div className="fixed inset-0 overflow-hidden pointer-events-none" style={{ zIndex: 1 }}>
         {particles.map((particle) => (
           <div
             key={particle.id}
             className="particle"
             style={{
               left: `${particle.x}%`,
+              bottom: '0',
               width: `${particle.size}px`,
               height: `${particle.size}px`,
-              animationDuration: `${particle.duration}s`,
-              animationDelay: `${particle.delay}s`,
-              '--drift': `${(Math.random() - 0.5) * 100}px`
+              animation: `float-particle ${particle.duration}s linear infinite`,
+              animationDelay: `${particle.delay}s`
             }}
           />
         ))}
