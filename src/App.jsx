@@ -412,11 +412,8 @@ CERTIFICATIONS
           </div>
 
           {/* Contact Actions */}
-          <div className="flex flex-col sm:flex-row justify-center gap-4">
-            <a href="mailto:mahmadimran383@gmail.com" className="px-8 py-3 bg-blue-500 hover:bg-blue-600 rounded-full font-semibold transition-all hover:scale-105">
-              Send Email
-            </a>
-            <a href="tel:+923264498774" className="px-8 py-3 bg-slate-700 hover:bg-slate-600 rounded-full font-semibold transition-all hover:scale-105">
+          <div className="flex justify-center">
+            <a href="tel:+923264498774" className="px-8 py-3 bg-gradient-to-r from-blue-500 to-cyan-500 hover:from-blue-600 hover:to-cyan-600 rounded-full font-semibold transition-all hover:scale-105 hover:shadow-lg hover:shadow-blue-500/50">
               Call Me
             </a>
           </div>
