@@ -378,7 +378,7 @@ CERTIFICATIONS
       <nav className="fixed top-0 w-full bg-slate-900/80 backdrop-blur-md z-50 border-b border-blue-500/20">
         <div className="max-w-6xl mx-auto px-6 py-4">
           <div className="flex justify-between items-center">
-            <h1 className="text-2xl font-bold bg-gradient-to-r from-blue-400 to-cyan-400 bg-clip-text text-transparent">MA</h1>
+            <h1 className="text-2xl font-bold bg-gradient-to-r from-blue-400 to-cyan-400 bg-clip-text text-transparent">Muhammad Ahmad</h1>
             <div className="hidden md:flex gap-8">
               {['About', 'Experience', 'Projects', 'Skills', 'Education', 'Contact'].map(item => (
                 <button 
