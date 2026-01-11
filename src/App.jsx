@@ -7,7 +7,27 @@ export default function Portfolio() {
   const [isTypingComplete, setIsTypingComplete] = useState(false);
   const [activeSection, setActiveSection] = useState('about');
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
+  const [particles, setParticles] = useState([]);
   const fullText = "Muhammad Ahmad";
+
+  // Generate particles
+  useEffect(() => {
+    const generateParticles = () => {
+      const newParticles = [];
+      for (let i = 0; i < 30; i++) {
+        newParticles.push({
+          id: i,
+          x: Math.random() * 100,
+          y: Math.random() * 100,
+          size: Math.random() * 4 + 2,
+          duration: Math.random() * 20 + 15,
+          delay: Math.random() * 5
+        });
+      }
+      setParticles(newParticles);
+    };
+    generateParticles();
+  }, []);
 
   useEffect(() => {
     let index = 0;
@@ -293,10 +313,66 @@ CERTIFICATIONS
         .glow-on-hover:hover {
           box-shadow: 0 0 20px rgba(59, 130, 246, 0.5);
         }
+
+        .particle {
+          position: absolute;
+          background: radial-gradient(circle, rgba(59, 130, 246, 0.8) 0%, rgba(6, 182, 212, 0.4) 50%, transparent 100%);
+          border-radius: 50%;
+          pointer-events: none;
+          animation: float-particle linear infinite;
+        }
+
+        @keyframes float-particle {
+          0% {
+            transform: translateY(100vh) translateX(0);
+            opacity: 0;
+          }
+          10% {
+            opacity: 1;
+          }
+          90% {
+            opacity: 1;
+          }
+          100% {
+            transform: translateY(-100px) translateX(var(--drift));
+            opacity: 0;
+          }
+        }
+
+        .connection-line {
+          position: absolute;
+          height: 1px;
+          background: linear-gradient(90deg, transparent, rgba(59, 130, 246, 0.3), transparent);
+          pointer-events: none;
+          animation: fade-in-out 3s ease-in-out infinite;
+        }
+
+        @keyframes fade-in-out {
+          0%, 100% { opacity: 0; }
+          50% { opacity: 1; }
+        }
       `}</style>
 
       {/* Animated Background */}
       <div className="fixed inset-0 animated-bg -z-10"></div>
+
+      {/* Floating Particles */}
+      <div className="fixed inset-0 overflow-hidden pointer-events-none -z-10">
+        {particles.map((particle) => (
+          <div
+            key={particle.id}
+            className="particle"
+            style={{
+              left: `${particle.x}%`,
+              width: `${particle.size}px`,
+              height: `${particle.size}px`,
+              animationDuration: `${particle.duration}s`,
+              animationDelay: `${particle.delay}s`,
+              '--drift': `${(Math.random() - 0.5) * 100}px`
+            }}
+          />
+        ))}
+      </div>
 
       {/* Navigation */}
       <nav className="fixed top-0 w-full bg-slate-900/80 backdrop-blur-md z-50 border-b border-blue-500/20">
