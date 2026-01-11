@@ -218,20 +218,9 @@ CERTIFICATIONS
               <p className={`text-xl md:text-2xl text-blue-300 mb-6 transition-all duration-1000 ${isTypingComplete ? 'opacity-100' : 'opacity-0'}`}>
                 Aspiring Data Scientist
               </p>
-              <p className={`text-base text-slate-300 max-w-2xl mb-6 transition-all duration-1000 ${isTypingComplete ? 'opacity-100' : 'opacity-0'}`}>
-                <span className="text-blue-400 font-semibold">Data Scientist</span> specializing in <span className="text-cyan-400 font-semibold">data analysis</span> and <span className="text-purple-400 font-semibold">machine learning</span>, converting raw data into actionable insights with <span className="text-green-400 font-semibold">Python</span> and <span className="text-yellow-400 font-semibold">SQL</span>.
+              <p className={`text-base text-slate-300 max-w-2xl mb-6 leading-relaxed transition-all duration-1000 ${isTypingComplete ? 'opacity-100' : 'opacity-0'}`}>
+                Passionate <span className="text-blue-400 font-semibold">Data Scientist</span> with expertise in building end-to-end machine learning solutions and extracting meaningful insights from complex datasets. Experienced in developing predictive models, creating interactive dashboards, and implementing data-driven strategies. Proficient in <span className="text-green-400 font-semibold">Python</span>, <span className="text-yellow-400 font-semibold">SQL</span>, and modern ML frameworks like <span className="text-purple-400 font-semibold">PyTorch</span>. Skilled in transforming raw data into actionable business intelligence through advanced analytics, feature engineering, and visualization techniques. Currently pursuing a Bachelor's in Data Science at FAST-NUCES while gaining hands-on experience through real-world projects and internships.
               </p>
-              
-              <div className={`flex flex-wrap justify-center md:justify-start gap-6 mb-6 transition-all duration-1000 ${isTypingComplete ? 'opacity-100' : 'opacity-0'}`}>
-                <div className="flex items-center gap-2 text-slate-300">
-                  <MapPin size={18} className="text-blue-400" />
-                  <span>Lahore, Pakistan</span>
-                </div>
-                <a href="tel:+923264498774" className="flex items-center gap-2 text-slate-300 hover:text-blue-400 transition-colors">
-                  <Phone size={18} className="text-blue-400" />
-                  <span>+92 326 4498774</span>
-                </a>
-              </div>
 
               <div className={`transition-all duration-1000 ${isTypingComplete ? 'opacity-100' : 'opacity-0'}`}>
                 <button onClick={handleDownloadCV} className="inline-flex items-center gap-2 px-8 py-3 bg-gradient-to-r from-blue-500 to-cyan-500 hover:from-blue-600 hover:to-cyan-600 rounded-full font-semibold transition-all hover:scale-105 hover:shadow-lg hover:shadow-blue-500/50">
