@@ -378,8 +378,8 @@ CERTIFICATIONS
       <nav className="fixed top-0 w-full bg-slate-900/80 backdrop-blur-md z-50 border-b border-blue-500/20">
         <div className="max-w-6xl mx-auto px-6 py-4">
           <div className="flex justify-between items-center">
-            <h1 className="text-2xl font-bold bg-gradient-to-r from-blue-400 to-cyan-400 bg-clip-text text-transparent">Muhammad Ahmad</h1>
-            <div className="hidden md:flex gap-8">
+            <h1 className="text-2xl font-bold bg-gradient-to-r from-blue-400 to-cyan-400 bg-clip-text text-transparent">MA</h1>
+            <div className="hidden md:flex gap-8 items-center">
               {['About', 'Experience', 'Projects', 'Skills', 'Education', 'Contact'].map(item => (
                 <button 
                   key={item} 
@@ -389,6 +389,13 @@ CERTIFICATIONS
                   {item}
                 </button>
               ))}
+              <button 
+                onClick={handleDownloadCV}
+                className="inline-flex items-center gap-2 px-4 py-2 bg-blue-500/20 hover:bg-blue-500/30 rounded-lg font-semibold transition-all hover:scale-105 border border-blue-500/30"
+              >
+                <Download size={16} />
+                CV
+              </button>
             </div>
             <button className="md:hidden" onClick={() => setMobileMenuOpen(!mobileMenuOpen)}>
               {mobileMenuOpen ? <X /> : <Menu />}
@@ -401,6 +408,13 @@ CERTIFICATIONS
                   {item}
                 </button>
               ))}
+              <button 
+                onClick={handleDownloadCV}
+                className="inline-flex items-center gap-2 px-4 py-2 bg-blue-500/20 hover:bg-blue-500/30 rounded-lg font-semibold transition-all text-left"
+              >
+                <Download size={16} />
+                Download CV
+              </button>
             </div>
           )}
         </div>
@@ -434,8 +448,19 @@ CERTIFICATIONS
                 Passionate <span className="text-blue-400 font-semibold">Data Scientist</span> with expertise in building <span className="text-cyan-400 font-semibold">end-to-end machine learning solutions</span> and extracting <span className="text-emerald-400 font-semibold">meaningful insights</span> from complex datasets. Experienced in developing <span className="text-indigo-400 font-semibold">predictive models</span>, creating <span className="text-violet-400 font-semibold">interactive dashboards</span>, and implementing <span className="text-rose-400 font-semibold">data-driven strategies</span>. Proficient in <span className="text-green-400 font-semibold">Python</span>, <span className="text-yellow-400 font-semibold">SQL</span>, and modern ML frameworks like <span className="text-purple-400 font-semibold">PyTorch</span>. Skilled in transforming raw data into <span className="text-orange-400 font-semibold">actionable business intelligence</span> through <span className="text-pink-400 font-semibold">advanced analytics</span>, <span className="text-teal-400 font-semibold">feature engineering</span>, and <span className="text-sky-400 font-semibold">visualization techniques</span>. Currently pursuing a Bachelor's in <span className="text-blue-300 font-semibold">Data Science</span> at <span className="text-cyan-300 font-semibold">FAST-NUCES</span> while gaining hands-on experience through real-world projects and internships.
               </p>
 
-              <div className={`transition-all duration-1000 ${isTypingComplete ? 'opacity-100' : 'opacity-0'}`}>
-                <button onClick={handleDownloadCV} className="inline-flex items-center gap-2 px-8 py-3 bg-gradient-to-r from-blue-500 to-cyan-500 hover:from-blue-600 hover:to-cyan-600 rounded-full font-semibold transition-all hover:scale-105 hover:shadow-lg hover:shadow-blue-500/50">
+              <div className={`flex gap-4 transition-all duration-1000 ${isTypingComplete ? 'opacity-100' : 'opacity-0'}`}>
+                <a 
+                  href="https://calendly.com/your-calendly-link" 
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 px-8 py-3 bg-gradient-to-r from-blue-500 to-cyan-500 hover:from-blue-600 hover:to-cyan-600 rounded-full font-semibold transition-all hover:scale-105 hover:shadow-lg hover:shadow-blue-500/50"
+                >
+                  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                  </svg>
+                  Schedule a Call
+                </a>
+                <button onClick={handleDownloadCV} className="inline-flex items-center gap-2 px-8 py-3 bg-slate-700 hover:bg-slate-600 rounded-full font-semibold transition-all hover:scale-105">
                   <Download size={20} />
                   Download CV
                 </button>
