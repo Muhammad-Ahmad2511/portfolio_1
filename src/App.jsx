@@ -614,7 +614,7 @@ CERTIFICATIONS
 
     {[{
       q: "What services do you offer?",
-      a: "Machine learning model development, data analysis, interactive dashboard creation, ETL pipeline design, and data-driven consulting."
+      a: "Machine learning model development, data analysis, interactive dashboard creation and ETL pipeline design."
     },{
       q: "What programming languages and tools do you use?",
       a: "I primarily work with Python, SQL, PyTorch for ML/AI, and Power BI/Tableau for visualizations."
