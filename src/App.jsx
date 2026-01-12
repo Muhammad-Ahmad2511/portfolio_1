@@ -460,10 +460,7 @@ CERTIFICATIONS
                   </svg>
                   Schedule a Call
                 </a>
-                <button onClick={handleDownloadCV} className="inline-flex items-center gap-2 px-8 py-3 bg-slate-700 hover:bg-slate-600 rounded-full font-semibold transition-all hover:scale-105">
-                  <Download size={20} />
-                  Download CV
-                </button>
+                
               </div>
             </div>
           </div>
