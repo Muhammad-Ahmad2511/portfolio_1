@@ -607,51 +607,49 @@ CERTIFICATIONS
       </section>
 {/* FAQs */}
 <section id="faqs" className="py-20 px-6 scroll-section">
-  <div className="max-w-6xl mx-auto">
+  <div className="max-w-4xl mx-auto">
     <h2 className="text-4xl font-bold mb-12 text-center">
-      Frequently Asked Questions
+      Frequently Asked Questions (FAQs)
     </h2>
 
-    <div className="space-y-6">
-      {[
-        {
-          q: "What services do you offer?",
-          a: "Machine learning model development, data analysis, interactive dashboard creation, ETL pipeline design, and data-driven consulting."
-        },
-        {
-          q: "What programming languages and tools do you use?",
-          a: "I primarily work with Python, SQL, PyTorch for ML/AI, and Power BI/Tableau for visualizations."
-        },
-        {
-          q: "Are you available for freelance or contract work?",
-          a: "Yes, I'm open to freelance projects, internships, and part-time opportunities while completing my degree."
-        },
-        {
-          q: "What types of projects have you worked on?",
-          a: "Income prediction models, inventory management dashboards, habit tracking apps, and business intelligence solutions with real-world data."
-        },
-        {
-          q: "How long does a typical project take?",
-          a: "Project timelines vary based on scope, but most small to medium projects take 2–4 weeks from kickoff to delivery."
-        },
-        {
-          q: "How can I get in touch with you?",
-          a: "You can email me at mahmadimran383@gmail.com, connect on LinkedIn, or schedule a call directly through the contact section."
-        }
-      ].map((item, index) => (
-        <div
-          key={index}
-          className="stagger-item bg-slate-800/50 backdrop-blur-sm p-6 rounded-xl border border-blue-500/20 glow-on-hover"
-        >
-          <h3 className="text-lg font-semibold text-blue-400 mb-2">
-            {item.q}
-          </h3>
-          <p className="text-slate-300">{item.a}</p>
+    {[{
+      q: "What services do you offer?",
+      a: "Machine learning model development, data analysis, interactive dashboard creation, ETL pipeline design, and data-driven consulting."
+    },{
+      q: "What programming languages and tools do you use?",
+      a: "I primarily work with Python, SQL, PyTorch for ML/AI, and Power BI/Tableau for visualizations."
+    },{
+      q: "Are you available for freelance or contract work?",
+      a: "Yes, I'm open to freelance projects, internships, and part-time opportunities while completing my degree."
+    },{
+      q: "What types of projects have you worked on?",
+      a: "Income prediction models, inventory management dashboards, habit tracking apps, and business intelligence solutions with real-world data."
+    },{
+      q: "How long does a typical project take?",
+      a: "Project timelines vary based on scope, but most small to medium projects take 2–4 weeks from kickoff to delivery."
+    },{
+      q: "How can I get in touch with you?",
+      a: "You can email me at mahmadimran383@gmail.com, connect on LinkedIn, or schedule a call directly through the contact section."
+    }].map((item, index) => (
+      <details
+        key={index}
+        className="group mb-4 border border-blue-500/30 rounded-lg bg-slate-900/60"
+      >
+        <summary className="flex justify-between items-center cursor-pointer list-none px-6 py-4 text-lg font-semibold text-white">
+          {item.q}
+          <span className="text-blue-400 text-2xl transition-transform group-open:rotate-45">
+            +
+          </span>
+        </summary>
+
+        <div className="px-6 pb-4 text-slate-300 leading-relaxed">
+          {item.a}
         </div>
-      ))}
-    </div>
+      </details>
+    ))}
   </div>
 </section>
+
 
       {/* Contact */}
       <section id="contact" className="py-20 px-6 scroll-section">
