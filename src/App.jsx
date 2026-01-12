@@ -450,7 +450,7 @@ CERTIFICATIONS
 
               <div className={`flex gap-4 transition-all duration-1000 ${isTypingComplete ? 'opacity-100' : 'opacity-0'}`}>
                 <a 
-                  href="https://calendly.com/your-calendly-link" 
+                  href="https://calendly.com/mahmadimran383/30min" 
                   target="_blank"
                   rel="noopener noreferrer"
                   className="inline-flex items-center gap-2 px-8 py-3 bg-gradient-to-r from-blue-500 to-cyan-500 hover:from-blue-600 hover:to-cyan-600 rounded-full font-semibold transition-all hover:scale-105 hover:shadow-lg hover:shadow-blue-500/50"
