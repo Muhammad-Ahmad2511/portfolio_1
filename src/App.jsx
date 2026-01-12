@@ -632,9 +632,15 @@ CERTIFICATIONS
       a: "You can email me at mahmadimran383@gmail.com, connect on LinkedIn, or schedule a call directly through the contact section."
     }].map((item, index) => (
       <details
-        key={index}
-        className="group mb-4 border border-blue-500/30 rounded-lg bg-slate-900/60"
-      >
+  key={index}
+  className="group mb-4 border border-blue-500/30 rounded-lg bg-slate-900/60
+             transition-all duration-300
+             hover:border-blue-400
+             hover:bg-blue-500/10
+             hover:shadow-lg
+             hover:shadow-blue-500/30"
+>
+
         <summary className="flex justify-between items-center cursor-pointer list-none px-6 py-4 text-lg font-semibold text-white">
           {item.q}
           <span className="text-blue-400 text-2xl transition-transform group-open:rotate-45">
